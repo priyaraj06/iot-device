@@ -11,8 +11,47 @@
 <button onclick="ledOn()">LED ON</button>
 <button onclick="ledOff()">LED OFF</button>
 
-<script type="module" src="script.js"></script>
+<script type="module">
+
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+
+import { getDatabase, ref, set } from
+"https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+
+// 🔥 Your Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCXA5E6caU-2IDDdYvAupfZYAJvGFyP3aw",
+  authDomain: "iot-device-ce23f.firebaseapp.com",
+  databaseURL: "https://iot-device-ce23f-default-rtdb.firebaseio.com",
+  projectId: "iot-device-ce23f",
+  storageBucket: "iot-device-ce23f.firebasestorage.app",
+  messagingSenderId: "392769454456",
+  appId: "1:392769454456:web:3f5fdf4564d614c3d5888d",
+  measurementId: "G-2FYGXWBG89"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+
+// 🔵 LED ON
+window.ledOn = function() {
+  set(ref(database, 'LED'), {
+    state: 1
+  });
+}
+
+// 🔴 LED OFF
+window.ledOff = function() {
+  set(ref(database, 'LED'), {
+    state: 0
+  });
+}
+
+</script>
 
 </body>
 </html>
-
